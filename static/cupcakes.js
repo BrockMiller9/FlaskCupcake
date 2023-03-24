@@ -49,4 +49,13 @@ $("#new-cupcake-form").on("submit", async function (evt) {
   $("#new-cupcake-form").trigger("reset");
 });
 
+$("#cupcakes-list").on("click", ".delete-button", async function (evt) {
+  evt.preventDefault();
+  let $cupcake = $(evt.target).closest("div");
+  let cupcakeId = $cupcake.attr("data-cupcake-id");
+
+  await axios.delete(`api/cupcakes/${cupcakeId}`);
+  $cupcake.remove();
+});
+
 $(showCupcakes);
